@@ -83,6 +83,9 @@ function ReviewStars({ rating }: { rating: number }) {
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [formNote, setFormNote] = useState("提交前请确认手机号，门店会电话确认具体时段。");
+  const currentDate = new Date();
+  currentDate.setMinutes(currentDate.getMinutes() - currentDate.getTimezoneOffset());
+  const defaultVisitDate = currentDate.toISOString().split("T")[0];
 
   const showSlide = (index: number) => {
     setActiveSlide((index + environmentSlides.length) % environmentSlides.length);
@@ -547,7 +550,7 @@ export default function Home() {
                 </label>
                 <label>
                   预约日期
-                  <input type="date" name="date" required />
+                  <input type="date" name="date" required defaultValue={defaultVisitDate} />
                 </label>
                 <label>
                   到店时间
